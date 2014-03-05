@@ -3,4 +3,5 @@ MediaMonitor
 
 CS361 Project B.
 
-Names: Sara Thorup
+Names:  Sara Thorup
+        Jason M Malutich
