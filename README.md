@@ -1,7 +1,8 @@
 MediaMonitor
 ============
 
-CS361 Project B.
+__CS361 Project B__
 
-Names:  Sara Thorup
-        Jason M Malutich
+__Names:__  
+Sara Thorup  
+Jason M Malutich
