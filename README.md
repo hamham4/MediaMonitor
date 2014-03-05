@@ -1,4 +1,5 @@
 MediaMonitor
 ============
 
-CS361 Project B
+CS361 Project B.
+
