@@ -1,7 +1,12 @@
-require("sdk/tabs").on("ready", runScript);
+require("sdk/tabs").on("ready", blockOrAllowURL);
 
-function runScript(tab) {
-	if (tab.url.search(/google.com/i) >= 0 ){
+//Parse XML file
+
+var whiteList =["weather.com","google.com","wired.com"];
+
+function blockOrAllowURL(tab) {
+
+	if (checkWhiteList(tab.url)) {
 		 tab.attach({
     		contentScript: "if (document.body) document.body.style.border = '5px solid green';"
   		});
@@ -15,3 +20,12 @@ function runScript(tab) {
 }
 
 
+function checkWhiteList(userURL) {
+	var approvedFlag = false;
+    var regexWhiteList = new RegExp(whiteList.join("|"), "i");
+    
+    approvedFlag = (userURL.match(regexWhiteList) != null);
+    
+    return approvedFlag;
+
+}
