@@ -32,11 +32,12 @@ pageMod.PageMod({
             if(first_array[i].contains(tabUrl))
             {
                 contains = 1;
+                break;
             }
             i++;
         }
         i = 0;
-        if (contains != 1){
+        if (contains == 1){
             console.log("now e-mailing your parents. prepare for grounding");
             worker.tab.url = 'http://arabcrunch.com/wp-content/uploads/2013/05/block-website.jpeg'
         }
