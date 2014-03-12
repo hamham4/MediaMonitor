@@ -1,12 +1,20 @@
-//Tutorial: Open a web page
-var tabs = require("sdk/tabs");
-tabs.open({
-	url: "http://www.google.com",
-	onReady: runScript
-});
+//Practice with time
 
-function runScript(tab) {
-	tab.attach({
-		contentScript:"document.body.style.border = '5px solid red';"
-	});
+//needed to modify tabs in firefox extension
+require("sdk/tabs").on("ready", onNewTab);
+
+var TAB; 
+function onNewTab(tab) {
+	TAB = tab;
+
+	//sets which function is called after x ms
+	setTimeout(onTimeOut, 20);
 }
+
+function onTimeOut(){
+	TAB.attach({
+            contentScript: 'document.body.innerHTML = ' +
+                 ' "<h1>Browsing time has expired</h1>";'
+     });
+}
+
