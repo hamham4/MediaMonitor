@@ -2,6 +2,10 @@ require("sdk/tabs").on("ready", blockOrAllowURL);
 var tmr = require("sdk/timers");
 var windows = require("sdk/windows").browserWindows;
 var data = require("sdk/self").data;
+
+///////////////////////////////////////////////////
+//Create a panel to display remaining time       //
+///////////////////////////////////////////////////
 var timeRemainingPanel = require("sdk/panel").Panel({
   width: 200,
   height: 50,
@@ -19,13 +23,20 @@ timeRemainingPanel.on("show", function() {
   timeRemainingPanel.port.emit("show");
 });
 
-//pretend that we are readng and updating this from file
-var elapsedTime = 0;
+///////////////////////////////////////////////////////
+//Close all firefox windows after elapsed time       //
+///////////////////////////////////////////////////////
 
-var myTimer = tmr.setInterval(timeCheck, 10000);
+
+//pretend that we are readng and updating this from file
+//in minutes
+var elapsedTime = 0;
+var allotedTime = 1;
+
+var myTimer = tmr.setInterval(timeCheck, 60000);
 
 function timeCheck(){
-  if (elapsedTime == 3) {
+  if (elapsedTime == allottedTime) {
 
     tmr.clearInterval(myTimer);
     windows.activeWindow.close(function() {
@@ -38,6 +49,9 @@ function timeCheck(){
 //Parse XML file
 var whiteList =["weather.com","google.com","wired.com"];
 
+//////////////////////////////////////////////////////////
+//Only allow websites on the whitelist                  //
+//////////////////////////////////////////////////////////
 function blockOrAllowURL(tab) {
 
 	if (checkWhiteList(tab.url)) {
