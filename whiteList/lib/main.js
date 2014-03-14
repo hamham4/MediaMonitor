@@ -4,12 +4,45 @@ var windows = require("sdk/windows").browserWindows;
 var data = require("sdk/self").data;
 
 ///////////////////////////////////////////////////
+//Read and write remaining time to file          //
+///////////////////////////////////////////////////
+
+//if we had the path for the panelText.html file, then we coudl modify it
+//var filename = null;
+
+
+//this could be used to modify the file if we had the path
+//writeTextToFile("did it work?!?!?", filename);
+
+function writeTextToFile(text, filename) {
+  var fileIO = require("sdk/io/file");
+  var TextWriter = fileIO.open(filename, "w");
+  if (!TextWriter.closed) {
+    TextWriter.write(text);
+    TextWriter.close();
+  }
+}
+
+function readTextFromFile(filename) {
+  var fileIO = require("sdk/io/file");
+  var text = null;
+  if (fileIO.exists(filename)) {
+    var TextReader = fileIO.open(filename, "r");
+    if (!TextReader.closed) {
+      text = TextReader.read();
+      TextReader.close();
+    }
+  }
+  return text;
+}
+
+///////////////////////////////////////////////////
 //Create a panel to display remaining time       //
 ///////////////////////////////////////////////////
 var timeRemainingPanel = require("sdk/panel").Panel({
   width: 200,
   height: 50,
-  contentURL: data.url("panelText.html"),
+  contentURL: data.url('panelText.html'),
 });
 
 require("sdk/widget").Widget({
