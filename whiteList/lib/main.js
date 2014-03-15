@@ -63,3 +63,4 @@ function checkWhiteList(userURL) {
     
     return approvedFlag;
 }
+ 
