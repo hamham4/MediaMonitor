@@ -2,19 +2,26 @@ require("sdk/tabs").on("ready", blockOrAllowURL);
 var tmr = require("sdk/timers");
 var windows = require("sdk/windows").browserWindows;
 
-//pretend that we are readng and updating this from file
-var elapsedTime = 0;
+//pretend that we are readng this from the XML file
+//the time read from the file should be in mins
+var allottedTime =  1;  //in minutes
 
-var myTimer = tmr.setInterval(timeCheck, 10000);
+
+var elapsedTime = 0;   //in minutes
+
+//Every  60 seconds, the timeCheck function is called
+var myTimer = tmr.setInterval(timeCheck, 60000);
 
 function timeCheck(){
-  if (elapsedTime == 3) {
-
+  if (elapsedTime == allottedTime) {
     tmr.clearInterval(myTimer);
+
+    //close all firefox windows if the time has expired
     windows.activeWindow.close(function() {
       console.log("The active window was closed");
     });
   }
+  //Increment the number of minutes that have passed
   elapsedTime = elapsedTime + 1;
 }
 
