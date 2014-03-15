@@ -17,9 +17,9 @@ function timeCheck(){
   elapsedTime = elapsedTime + 1;
 }
 
-var allottedTime =  1;  //in minutes
+var allottedTime =  30;  //in minutes
 var elapsedTime = 0;   //in minutes
-var myTimer = tmr.setInterval(timeCheck, 10000);
+var myTimer = tmr.setInterval(timeCheck, 60000);
 
 var oReq = new XMLHttpRequest();
 oReq.onload = reqListener;
